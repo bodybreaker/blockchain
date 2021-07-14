@@ -1,18 +1,23 @@
 # 블록체인 연수
 
-## 기본 유틸리티 설치  
+## Chocolatey 설치 (윈도우 패키지 관리 유틸리티)   
 
-* Chocolatey 설치 (윈도우 패키지 관리 유틸리티)  
+* Chocolatey 다운로드 주소  
 https://chocolatey.org/
 
 * 파워쉘 관리자권한 실행 후 붙여넣기  
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
+
+## Chocolatey 를 통한 필요 유틸리티 설치  
+
 * 윈도우 터미널 설치  
-https://community.chocolatey.org/packages/microsoft-windows-terminal/1.8.1444.0
+https://community.chocolatey.org/packages/microsoft-windows-terminal/1.8.1444.0  
+choco install microsoft-windows-terminal
 
 * VirtualBox 설치 (우분투 가상화 머신 설치 위해서)  
-https://community.chocolatey.org/packages/virtualbox
+https://community.chocolatey.org/packages/virtualbox  
+choco install virtualbox
 
 * Git (소스형상관리) 설치  
 choco install git  
@@ -39,7 +44,7 @@ choco install mongodb
 choco install studio3t
 
 
-## Vagrant 설정  
+## Vagrant 설치 및 설정  
 
 * Vagrant 설치 (가상머신들을 생성,환경설정,관리 하는 도구)  
 https://community.chocolatey.org/packages/vagrant  
