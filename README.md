@@ -17,10 +17,10 @@ choco install microsoft-windows-terminal -y
 * VirtualBox 설치(https://community.chocolatey.org/packages/virtualbox)  
 choco install virtualbox -y
 
-* Git 설치 (소스형상관리)
+* Git 설치 (소스형상관리)  
 choco install git -y
 
-* winscp 설치 (ftp 클라이언트)
+* winscp 설치 (ftp 클라이언트)  
 choco install winscp -y
 
 * golang 설치 (프로그램 언어)  
@@ -87,3 +87,6 @@ https://www.centos.org/
 * virtualbox에 설치 과정(이미지)  
 https://github.com/bodybreaker/blockchain/tree/master/image/virtualbox-centos%EC%84%A4%EC%B9%98
 
+* VirtualBox Guest Addition 설치 실패시  
+yum install "kernel-devel-uname-r == $(uname -r)"  
+수행 후 재설치
