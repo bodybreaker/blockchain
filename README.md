@@ -11,9 +11,32 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 * 윈도우 터미널 설치  
 https://community.chocolatey.org/packages/microsoft-windows-terminal/1.8.1444.0
 
-
 * VirtualBox 설치 (우분투 가상화 머신 설치 위해서)  
 https://community.chocolatey.org/packages/virtualbox
+
+* Git (소스형상관리) 설치  
+choco install git  
+
+* winscp (ftp 클라이언트) 설치  
+choco install winscp
+
+* golang 설치(프로그램 언어)  
+choco install golang
+
+* atom 설치(개발도구)  
+choco install atom
+
+* mariadb 설치(DB)  
+choco install mariadb
+
+* mysql.workbench 설치 (DB 접근 클라이언트)  
+choco install mysql.workbench
+
+* 몽고db 설치 (DB)  
+choco install mongodb
+
+* studio3t 설치 (몽고 DB 클라이언트)  
+choco install studio3t
 
 
 ## Vagrant 설정  
