@@ -63,5 +63,5 @@ vagrant up
 https://www.centos.org/  
 7버젼 > x86_64
 
-* virtualbox에 설치 과정(이미지)
+* virtualbox에 설치 과정(이미지)  
 https://github.com/bodybreaker/blockchain/tree/master/image/virtualbox-centos%EC%84%A4%EC%B9%98
