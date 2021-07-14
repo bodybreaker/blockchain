@@ -14,10 +14,24 @@ https://community.chocolatey.org/packages/microsoft-windows-terminal/1.8.1444.0
 https://community.chocolatey.org/packages/virtualbox
 
 
-* Vagrant 설치  
+## Vagrant 설정  
+
+* Vagrant 설치 (가상머신들을 생성,환경설정,관리 하는 도구)
 https://community.chocolatey.org/packages/vagrant
+##설치후 재부팅
 
+* 폴더 생성  
+C:\VAGRANT\ubuntu18
 
-* centos 설치  
+* UBUNTU 18.04 버전 설치(C:\VAGRANT\ubuntu18 폴더에서 명령어 실행)  
+https://app.vagrantup.com/ubuntu/boxes/bionic64
+vagrant init ubuntu/bionic64
+vagrant up
+
+* centos 다운로드  
 https://www.centos.org/
 7버젼 > x86_64
+
+
+
+
