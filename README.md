@@ -58,6 +58,15 @@ vagrant init ubuntu/bionic64
 vagrant up
 up 후에 virtualbox 에서 정상 실행 여부 확인
 
+* vagrant 상태 확인  
+vagrant status
+
+* vagrant 종료  
+vagrant halt
+
+* vagrant 실행  
+vagrant up
+
 * SSH 접속  
 vagrant ssh
 
@@ -67,7 +76,6 @@ vagrant ssh
    계정명 : vagrant  
    비밀번호 : ssh-puttygen을 통해서 아래의 파일을 불러와 ppk 파일 생성 후 인증  
    C:\VAGRANT\ubuntu18\.vagrant\machines\default\virtualbox\private_key 
-
 
 
 ## Virtualbox에 centos 설치  
