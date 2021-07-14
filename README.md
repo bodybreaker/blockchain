@@ -42,7 +42,7 @@ choco install mongodb -y
 choco install studio3t -y
 
 
-## Vagrant 설치 및 설정  
+## Vagrant로 ubuntu 설치 및 설정  
 
 * Vagrant 설치 (가상머신들을 생성,환경설정,관리 하는 도구)  
 https://community.chocolatey.org/packages/vagrant  
@@ -51,10 +51,23 @@ https://community.chocolatey.org/packages/vagrant
 * 폴더 생성  
 C:\VAGRANT\ubuntu18
 
+
 * Vagrant를 통한 UBUNTU 18.04 버전 설치(C:\VAGRANT\ubuntu18 폴더에서 명령어 실행)  
 https://app.vagrantup.com/ubuntu/boxes/bionic64  
 vagrant init ubuntu/bionic64  
 vagrant up
+up 후에 virtualbox 에서 정상 실행 여부 확인
+
+* SSH 접속  
+vagrant ssh
+
+* winscp 접속  
+   ip : localhost  
+   포트 : 2222  
+   계정명 : vagrant  
+   비밀번호 : ssh-puttygen을 통해서 아래의 파일을 불러와 ppk 파일 생성 후 인증  
+   C:\VAGRANT\ubuntu18\.vagrant\machines\default\virtualbox\private_key 
+
 
 
 ## Virtualbox에 centos 설치  
@@ -65,3 +78,4 @@ https://www.centos.org/
 
 * virtualbox에 설치 과정(이미지)  
 https://github.com/bodybreaker/blockchain/tree/master/image/virtualbox-centos%EC%84%A4%EC%B9%98
+
