@@ -51,11 +51,17 @@ https://community.chocolatey.org/packages/vagrant
 * 폴더 생성  
 C:\VAGRANT\ubuntu18
 
-* UBUNTU 18.04 버전 설치(C:\VAGRANT\ubuntu18 폴더에서 명령어 실행)  
+* Vagrant를 통한 UBUNTU 18.04 버전 설치(C:\VAGRANT\ubuntu18 폴더에서 명령어 실행)  
 https://app.vagrantup.com/ubuntu/boxes/bionic64  
 vagrant init ubuntu/bionic64  
 vagrant up
 
-* centos 다운로드  
+
+## Virtualbox에 centos 설치  
+
+* centos7 이미지(iso) 다운로드  
 https://www.centos.org/  
 7버젼 > x86_64
+
+* virtualbox에 설치 과정(이미지)
+https://github.com/bodybreaker/blockchain/tree/master/image/virtualbox-centos%EC%84%A4%EC%B9%98
