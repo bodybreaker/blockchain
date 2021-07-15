@@ -90,3 +90,22 @@ https://github.com/bodybreaker/blockchain/tree/master/image/virtualbox-centos%EC
 * VirtualBox Guest Addition 설치 실패시  
 yum install "kernel-devel-uname-r == $(uname -r)"  
 수행 후 재설치
+
+
+## 우분투 접속  
+vagrant/ubuntu18 에서 가상머신 시작 및 점속  
+vagrant upvagrant ssh
+
+* 패키지 리스트 업데이트  
+sudo apt-get update
+
+* 패키지 업그레이드  
+sudo apt-get upgrade -y
+
+* 환경변수 조회
+env
+
+* 환경변수 추가  
+vi ~/.profile
+export PATH=$PATH:/ home/username/abc
+source.profile
