@@ -106,6 +106,6 @@ sudo apt-get upgrade -y
 env
 
 * 환경변수 추가  
-vi ~/.profile
-export PATH=$PATH:/ home/username/abc
+vi ~/.profile  
+export PATH=$PATH:/ home/username/abc  
 source.profile
