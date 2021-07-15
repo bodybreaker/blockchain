@@ -109,3 +109,14 @@ env
 vi ~/.profile  
 export PATH=$PATH:/ home/username/abc  
 source.profile
+
+* echo 명령어  
+echo "test" > test.txt (test.txt 파일에 test 덮어씀)
+echo "test" >> test.txt (test.txt 파일에 test Append)
+
+*가상 머신과 공유되는 폴더  
+윈도우 : C:\VAGRANT\ubuntu18  
+우분투 : /vagrant
+
+
+

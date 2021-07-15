@@ -1,0 +1,44 @@
+- Chocolatey 설치 및 강의실 네트워크 환경 확인
+- Virtualbox 설치
+- Vagrant 설치
+- VirtualBox 가상머신 직접생성 - CentOS 데스크탑 인스톨
+- Vagrant를 사용한 가상머신 생성 - ubuntu 18.x
+
+
+#Power-Shell 관리자권한으로 실행
+Chocolatey 설치 스크립트 실행
+- Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+#설치후 Power-Shell, 명령Prompt 를 관리자권한으로 재실행
+- choco install microsoft-windows-terminal
+- choco install virtualbox
+- choco install vagrant
+#재부팅
+
+# C:\VAGRANT\ubuntu18 디렉토리 생성 및 명령어 창에서 해당 디렉토리로 이동
+- vagrant init generic/ubuntu1804
+- vagrant up
+
+이후 설치할 소프트웨어들
+choco install git -y
+choco install winscp
+choco install golang
+choco install nodejs-lts
+choco install atom
+choco install mariadb
+choco install mysql.workbench
+choco install mongodb
+choco install studio3t
+
+vagrant box add --name ubuntu1804 .\bionic-server-cloudimg-amd64-vagrant.box
+vagrant init ubuntu1804
+vagrant up
+vagrant ssh
+
+vagrant status
+vagrant halt
+
+#WinSCP에서 Putty-gen을 사용해 Private key 변환/설정
+
+
+
+- Linux 기본 명령어

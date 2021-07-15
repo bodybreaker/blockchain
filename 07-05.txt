@@ -1,0 +1,102 @@
+09:10에 시작하겠습니다.
+
+
+vagrant/ubuntu18 에서... 가상머신 시작 및 접속
+vagrant up
+vagrant ssh
+
+LTS (Long Term Support)
+
+sudo apt update
+sudo apt-get update
+
+sudo apt-get upgrade -y
+
+//Ubuntu, Debian 패키지 관리 명령
+*.deb -> dpkg, aptitude, apt, apt-get
+
+//Red-hat, fedora, centos 패키지 관리 명령
+*.rpm -> rpm, yum
+
+# ls 디렉토리의 내용 보기
+man ls
+ls -a
+ls -l
+ls -al
+ll
+
+# cd (change directory)
+cd /
+cd, cd ~, cd $HOME (vagrant 사용자의 home 디렉토리로 이동)
+
+
+# mkdir
+mkdir doc1
+cd doc1
+touch 1.txt
+echo "this is 1.txt" > 1.txt
+cat 1.txt
+echo "2nd line" >> 1.txt
+
+# cp (copy)
+cd ..
+cp -r doc1 doc2
+ls doc1
+ls doc2
+cp doc2/1.txt doc1/1_1.txt
+ls doc1
+cp doc1/1_1.txt doc2/
+ls doc2
+
+# mv (move, rename)
+ls doc2
+mv doc2/1.txt doc2/2.txt
+ls doc2
+
+# rm(remove)
+mv doc2/1.txt doc2/2.txt
+ls doc2
+rm doc2 (동작 안함)
+rm -r doc2
+
+# ln -s (symbolic link)
+ln -s doc1/1.txt ./ln1.txt
+ls -al
+ln -s ln1.txt ln2.txt
+ls -al
+
+# /vagrant로 이동 윈도우에서 /vagrant/ubuntu18/new.txt생성
+head new.txt
+tail new.txt
+head -n 5 new.txt
+tail -n 5 new.txt
+tail -f new.txt // new.txt의 내용을 추가하면서 변경사항 확인
+
+
+# pwd
+# env
+# touch
+# cat
+# mc
+sudo apt install mc -y
+
+# ps
+# top //종료는 q 
+# htop
+# kill
+sleep 200 &
+ps
+kill PID(Sleep의 PID 숫자)
+# 명령 + &
+# bg
+# fg
+# jobs
+# CTRL + c
+# CTRL + z
+
+# 긴 명령어를 여러 라인에...
+
+curl http://cloud-images.ubuntu.com/bionic/20210623/bionic-server-cloudimg-amd64.vmdk \
+-output bionic-server-cloudimg-amd64.vmdk
+
+ls -al | awk '{print $2}' | sed '1d' | sort > result.txt
