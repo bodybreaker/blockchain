@@ -120,3 +120,17 @@ echo "test" >> test.txt (test.txt 파일에 test Append)
 
 
 
+## vagrant로 우분투 노드 생성
+* 폴더 생성  
+C:\VAGRANT\4ubuntu
+
+* Vagrantfile파일 생성  
+C:\VAGRANT\4ubuntu\Vagrantfile  
+(https://github.com/bodybreaker/blockchain/tree/master/vagrantFile4ubuntu/Vagrantfile)
+
+* box 생성  
+vagrant up  
+
+* virtual box 에서 확인 시 Master 머신 1개, worker 머신 2개가 생성된것 확인  
+
+
