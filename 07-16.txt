@@ -1,0 +1,69 @@
+09:15 시작하겠습니다.
+
+#c:\vagrant\ubuntu18 에서
+vagrant up
+vagrant ssh
+
+cat /etc/group
+cat /etc/passwd
+
+touch chmod.txt
+ls -al chmod.txt
+chmod 777 chmod.txt
+ls -al chmod.txt
+chmod 600 chmod.txt
+chmod u+x chmod.txt
+chmod g=rw chmod.txt
+chmod a+rw chmod.txt
+
+#chmod.txt 내용 편집 (WinSCP 편집 사용)
+---------------------------------
+#!/usr/bin/env bash
+ls -al
+----------------------------------
+
+chmod u+x chmod.txt
+
+./chmod.txt
+
+
+# nginx 웹서버 설치
+sudo apt-get update 
+sudo apt install nginx
+
+sudo service nginx status   ===  sudo systemctl status nginx.service
+sudo service nginx stop
+sudo service nginx start
+sudo service nginx restart
+
+# lynx
+sudo apt install lynx -y
+lynx 127.0.0.1
+
+# vagrant exit 후 Vagrantfile 수정
+config.vm.network "forwarded_port", guest: 80, host: 8080
+
+vagrant reload
+
+# html 수정
+----------------
+sudo nano /var/www/html/index.nginx-debian.html
+
+service -> systemctl
+
+# MySQL 서버 설치
+sudo apt install mysql-server
+// sudo mysql_secure_installation utility
+// mysqladmin -u root password 87654321
+sudo mysql
+ALTER USER 'root'@'localhost' IDENTIFIED BY '87654321';
+mysql -u root -p
+
+
+
+
+
+
+
+
+
