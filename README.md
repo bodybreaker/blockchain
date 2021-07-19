@@ -134,3 +134,96 @@ vagrant up
 * virtual box 에서 확인 시 Master 머신 1개, worker 머신 2개가 생성된것 확인  
 
 
+## 우분투에 도커 설치 (https://docs.docker.com/engine/install/ubuntu/)  
+
+* 기존 도커 있으면 삭제  
+sudo apt-get remove docker docker-engine docker.io containerd runc
+
+* 패키지 정보 업데이트  
+sudo apt-get update
+
+* 의존 패키지 도구 설치  
+sudo apt-get install -y \  
+    apt-transport-https \  
+    ca-certificates \  
+    curl \  
+    gnupg \  
+    lsb-release
+
+* docker gpg 키 생성  
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+
+* apt 소스에 추가  
+echo \  
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \  
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+* docker.com 포함 패키지 정보 업데이트  
+sudo apt-get update
+
+* docker CE 설치  
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+* Hello World 실행
+sudo docker run hello-world
+
+* ubuntu 20.04(latest) 실행  
+sudo docker run -it ubuntu bash
+
+
+* root 아닌 사용자로 sudo 없이 도커 명령어 사용  
+(1) 도커 그룹 확인  
+cat /etc/group  
+(2) docker 그룹에 사용자 추기  
+sudo usermod -aG docker $USER  
+(3) 로그아웃 후 재 접속
+exit
+
+* 재부팅시에 도커 활성화  
+sudo systemctl enable docker.service  
+sudo systemctl enable containerd.service  
+
+* 도커 모든 컨테이너 삭제  
+docker stop $(docker ps -a -q)  
+docker rm $(docker ps -a -q)
+
+* 도커 컨테이너 제어   
+(1)실행 후 컨테이너 exit  
+docker run ubuntu
+
+(2)컨테이너 run 상태 유지  
+docker run -it ubuntu bash : Ctrl+p,q
+
+(3)실행중인 컨테이너 접속  
+docker exec -it 컨테이너ID bash
+
+(4)컨테이너 정보 확인(Json 형태 결과 출력)  
+docker inspect 컨테이너ID
+
+* mysql 이미지 다운로드  
+docker pull mysql:5.6
+
+* mysql 실행(-d 데몬) 및 환경변수(-e 옵션), 포트(-p 3306->13306) 설정  
+docker run -d \  
+--name=mysql_56 \  
+-e MYSQL_ROOT_PASSWORD=root \  
+-e MYSQL_DATABASE=mydb \  
+-p 13306:3306 \  
+mysql:5.6
+
+* mysql bash 접속  
+docker exec -it mysql_56 bash
+
+* mysql 접속  
+docker exec -it mysql_56 mysql -uroot -proot
+
+* sudo apt-get install mysql-client  
+mysql -P13306 -h127.0.0.1 -uroot -proot
+
+* mysql 클라이언트 설치  
+sudo apt-get install mysql-client
+
+* VagrantFile 수정 ( 포트포워딩 추가)  
+config.vm.network "forwarded_port", guest: 13306, host: 3333  
+-> 윈도우에서 3333 포트 virtualbox 13306 포트 docker 3306

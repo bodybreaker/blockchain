@@ -1,0 +1,100 @@
+c:\vagrant\docker_ubuntu18 디렉토리 생성, 이동
+vagrant init ubuntu1804
+
+Vagrantfile 수정 -> 메모리 4기가, CPU 2개 이상
+
+vagrant up
+
+vagrant ssh
+
+# 구버전 삭제
+sudo apt-get remove docker docker-engine docker.io containerd runc
+
+# 패키지 정보 업데이트
+sudo apt-get update
+
+# 의존패키지, 도구 설치
+sudo apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+# Docker GPG 키 생성
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg |
+sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+# apt(apt-get) 패키지 관리대상 레포지토리로 Docker site추가
+echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# docker.com 포함 패키지 정보 업데이트
+sudo apt-get update
+
+#Docker CE 설치
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+
+# Hello-World 실행
+sudo docker run hello-world
+
+# ubuntu 20.04 (latest) 실행
+sudo docker run -it ubuntu bash
+
+# docker 그룹 확인
+cat /etc/group
+
+# docker 그룹에 사용자 추가
+sudo usermod -aG docker vagrant
+
+# vagrant 로그아웃 후 재 로그인
+groups
+
+
+# docker
+docker ps 
+docker ps -a
+docker rm 
+docker info
+docker version
+
+docker run ubuntu  -> 실행후 컨테이너 EXIT
+docker run -it ubuntu bash -> exit로 host os 복귀 -> 컨테이너 EXIT
+docker run -it ubuntu bash -> CTRL+ p, q  host os 복귀 -> 컨테이너 run 상태 유지
+
+docker exec -it c959a434070f bash <- container_id를 사용해 실행중인 컨테이너 재접속
+docker exec -it fervent_dubinsky bash <- container_name을 사용해 실행중인 컨테이너 재접속
+
+docker inspect c959a434070f -> JSON 형태로 결과 출력
+
+#간단한 필터
+docker rm $(docker ps --filter status=created -q)
+docker rm $(docker ps -aq)
+
+docker pause a687a085bb07
+docker rm a687a085bb07  <- pause/run 상태의 컨테이너는 rm 불가
+docker stop a687a085bb07
+docker rm a687a085bb07 <- stop 상태의 컨테이너 삭제
+
+
+# mysql5.6 실행 접속
+docker run -d \
+--name=mysql_56 \
+-e  MYSQL_ROOT_PASSWORD=87654321 \
+mysql:5.6
+
+docker exec -it mysql_56 bash
+#mysql -uroot -p87654321
+
+docker run -d \
+-e MYSQL_ROOT_PASSWORD=87654321 \
+-e MYSQL_DATABASE=new_database \
+-p 13306:3306 \
+mysql:5.6
+
+docker exec -it cf7290f1523a mysql -uroot -p87654321
+
+sudo apt install mysql-client
+mysql -P13306 -h127.0.0.1 -uroot -p87654321
+
