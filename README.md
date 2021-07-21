@@ -188,6 +188,9 @@ sudo systemctl enable containerd.service
 docker stop $(docker ps -a -q)  
 docker rm $(docker ps -a -q)
 
+* 도커 중지되있는 모든 컨테이너 삭제  
+docker container prune
+
 * 도커 컨테이너 제어   
 (1)실행 후 컨테이너 exit  
 docker run ubuntu
@@ -227,3 +230,89 @@ sudo apt-get install mysql-client
 * VagrantFile 수정 ( 포트포워딩 추가)  
 config.vm.network "forwarded_port", guest: 13306, host: 3333  
 -> 윈도우에서 3333 포트 virtualbox 13306 포트 docker 3306
+
+* Docker Volume 생성 및 조회  
+docker volume create mysql56  
+docker volume ls  
+
+* mysql Volume 지정 후 재 실행(컨테이너 삭제를 하여도 볼륨은 유지됨)  
+docker run -d \  
+--name=mysql_56 \  
+-e MYSQL_ROOT_PASSWORD=root \  
+-e MYSQL_DATABASE=mydb \  
+-p 13306:3306 \  
+-v mysql56:/var/lib/mysql \  
+mysql:5.6
+
+
+* mysql 컨테이너 볼륨을 윈도우와 연결  
+docker run -d \  
+--name=mysql_56 \  
+-e MYSQL_ROOT_PASSWORD=root \  
+-e MYSQL_DATABASE=mydb \  
+-p 13306:3306 \  
+-v /vagrant/mysql56:/var/lib/mysql \  
+mysql:5.6
+
+* VagrantFile 수정 후 reload  
+config.vm.network "forwarded_port", guest: 80, host: 8080  
+config.vm.network "forwarded_port", guest: 8888, host: 8888
+
+vagrant reload
+
+* nginx 컨테이너 설정
+docker run --name my_nginx \  
+-v /vagrant/html:/usr/share/nginx/html \  
+-p 8888:80 \  
+-d nginx
+
+* 네트워크 설정  
+docker network connect test my_nginx  
+docker network inspect bridge  
+docker network inspect test  
+docker inspect my_nginx  
+
+* Mysql + Wordpress 설치  
+docker run -d \  
+-e MYSQL_ROOT_PASSWORD=root \  
+-e MYSQL_DATABASE=new_database \  
+-p 13306:3306 \  
+-v  /home/vagrant/mysql56:/var/lib/mysql \  
+--network test \  
+--name my_mysql \  
+mysql:5.6  
+
+---------------------------  
+docker run -d \  
+--name my_wordpress \  
+-p 8888:80 \  
+--network test \  
+wordpress  
+
+
+* wordpress 세팅  
+데이터베이스 이름 : new_database  
+사용자명 : root  
+비밀번호 : root  
+데이터베이스 호스트 : (docker network inspect test 해서 나오는 mysql ip)
+
+
+
+
+# 도커파일 만들기(이미지)  
+
+
+* 폴더 생성  
+mkdir ~/ubuntu nginx
+
+
+* docker 파일 구성  
+https://github.com/bodybreaker/blockchain/Dockerfile
+
+
+* 파일 빌드  
+docker build -t my_nginx:latest .  
+
+* 실행  
+docker run -itd -p 8888:80 my_nginx 
+

@@ -1,0 +1,163 @@
+docker volume ls
+sudo ls -al /var/lib/docker/volumes
+docker volume ls
+
+# Docker 볼륨 생성 및 확인
+docker volume create mysql56
+docker volume ls
+
+# mysql 컨테이너를 볼륨을 지정해 실행
+docker run -d \
+-e MYSQL_ROOT_PASSWORD=87654321 \
+-e MYSQL_DATABASE=new_database \
+-p 13306:3306 \
+-v  mysql56:/var/lib/mysql \
+mysql:5.6
+
+#컨테이너 mysql에 DB root 권한으로 연결
+docker exec -it ecstatic_noether mysql -uroot -p87654321
+
+show databases; <- new_database 생성을 확인
+exit
+
+#컨테이너 종료/삭제
+docker stop ecstatic_noether && docker rm ecstatic_noether
+
+# mysql 컨테이너를 볼륨을 지정해 실행 (env없이 이전과 동일한 볼륨지정)
+docker run -d \
+-p 13306:3306 \
+-v  mysql56:/var/lib/mysql \
+mysql:5.6
+
+#컨테이너 mysql에 DB root 권한으로 연결
+docker exec -it boring_mirzakhani mysql -uroot -p87654321
+#컨테이너 종료/삭제
+docker stop boring_mirzakhani && docker rm boring_mirzakhani
+
+# 볼륨 지정 없이 mysql 재실행 <- new_database 가 없음
+docker run -d \
+-e MYSQL_ROOT_PASSWORD=87654321 \
+-p 13306:3306 \
+mysql:5.6
+
+# docker container prune 정지된 모든 컨테이너 삭제
+
+# mysql 컨테이너를 볼륨을 지정해 실행 (env없이 이전과 동일한 볼륨지정)
+docker run -d \
+-p 13306:3306 \
+-v  mysql56:/var/lib/mysql \
+mysql:5.6
+
+sudo ls -al /var/lib/docker/volumes/mysql56
+
+sudo ls -al /var/lib/docker/volumes/mysql56/_data/mysql
+
+# Windows와 Ubuntu 가상머신간의 공유 디렉토리 생성
+c:\vagrant\docker_ubuntu18\mysql56
+
+# mysql 컨테이너를 볼륨을 위의 공유 디렉토리로 지정
+docker run -d \
+-e MYSQL_ROOT_PASSWORD=87654321 \
+-e MYSQL_DATABASE=new_database \
+-p 13306:3306 \
+-v  /vagrant/mysql56:/var/lib/mysql \
+mysql:5.6
+
+# Vagrant 파일을 수정 80:8080 8888:8888 포워딩 후
+vagrant reload
+
+docker run --name my_nginx \
+-v /vagrant/html:/usr/share/nginx/html \
+-p 8888:80 \
+-d nginx
+
+
+# 볼륨 삭제
+docker volume rm mysql56
+
+# Network
+docker network ls
+docker network inspect bridge
+
+docker network create test
+docker network ls
+
+docker network connect test my_nginx
+docker network inspect bridge
+docker network inspect test
+docker inspect my_nginx
+
+
+docker run -d \
+-e MYSQL_ROOT_PASSWORD=87654321 \
+-e MYSQL_DATABASE=new_database \
+-p 13306:3306 \
+-v  /home/vagrant/mysql56:/var/lib/mysql \
+--network test \
+--name mysql \
+mysql:5.6
+
+docker run --name my_wordpress \
+-p 8888:80 \
+--network test \
+-d wordpress
+
+docker exec -it my_wordpress bash
+
+
+
+docker run -d --rm \
+-e MYSQL_ROOT_PASSWORD=87654321 \
+-e MYSQL_DATABASE=wordpress \
+-e MYSQL_USER=wordpress \
+-e MYSQL_PASSWORD=12345678 \
+-p 13306:3306 \
+-v  /home/vagrant/mysql56:/var/lib/mysql \
+--network test \
+--name mysql \
+mysql:5.6
+
+docker exec -it mysql mysql -uwordpress -p12345678
+
+docker run --name my_wordpress --rm \
+-p 8888:80 \
+--network test \
+--link mysql \
+-e WORDPRESS_DB_HOST=mysql \
+-e WORDPRESS_DB_USER=wordpress \
+-e WORDPRESS_DB_PASSWORD=12345678 \
+-e WORDPRESS_DB_NAME=wordpress \
+-e WORDPRESS_TABLE_PREFIX=wp_ \
+-d wordpress
+
+
+Makefile
+Vagrantfile
+Dockerfile
+
+# https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+
+Dockerfile
+---------------------------------
+FROM ubuntu:latest
+
+RUN apt-get update && apt-get install -y -q nginx
+
+COPY index.html /usr/share/nginx/html/
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
+
+---------------------------------
+
+docker build -t new_nginx:latest .
+
+docker run -itd  -p 8888:80 --rm new_nginx
+
+-v --volume
+
+
+
+
+
