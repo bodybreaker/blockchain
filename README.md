@@ -306,8 +306,8 @@ wordpress
 mkdir ~/ubuntu nginx
 
 
-* docker 파일 구성  
-https://github.com/bodybreaker/blockchain/Dockerfile
+* docker 파일 구성 (우분투+nginx)  
+https://github.com/bodybreaker/blockchain/blob/master/Dockerfile
 
 
 * 파일 빌드  
@@ -315,4 +315,44 @@ docker build -t my_nginx:latest .
 
 * 실행  
 docker run -itd -p 8888:80 my_nginx 
+
+* 태그 부여(동일한 이미지에 태그만 부여)  
+docker tag nginx_0721:5.0 nginx_0721:latest
+
+* 실행  
+docker run -d -p 8888:80 nginx_0721
+
+# Node js 환경 구성  
+* 교재 2-2-2 도커파일 빌드  
+docker build -t docker_node:step1 .
+  
+* 실행  
+docker run --name step1 -it docker_node:step1 bash  
+ node --version  
+ npm --version  
+ yarn --version  
+ yarn create nuxt-app  
+ yarn run dev  
+docker cp step1:/app ~/app
+
+* 교재 2-2-3도커파일 빌드  
+docker build -t docker_node:step2 .  
+docker run --init --name step2 -p 8888:3000 -it docker_node:step2
+
+
+* 도커 컴포스  
+https://docs.docker.com/compose/install/
+
+
+
+* 마스터, 워커 1, 워커 2 가동  
+
+* 각 머신에 도커 설치  
+https://docs.docker.com/engine/install/ubuntu/
+
+
+* Swarm 설정
+Master:  docker swarm init --advertise-addr 172.20.0.100  
+각 워커: docker swarm join --token SWMTKN-1-5zelvbv43ls1dnu5720amsfi6v1s8a3jsbua9bhgwcru0zqg0s-21y2zomjcflixu019wc3r9jkw 172.20.0.100:2377 (
+
 

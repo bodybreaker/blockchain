@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+  # Rails 샘플 애플리케이션
+  app:
+    build: .
+
+    init: true
+
+    ports:
+      - "3000:3000"
+
+    volumes:
+      - .:/app

@@ -1,0 +1,88 @@
+#Ubuntu + Nginx 재 빌드
+docker build -t nginx_0721:5.0 .
+docker tag nginx_0721:5.0 nginx_0721:latest
+docker images
+docker rmi nginx_0721:5.0
+docker image ls
+
+docker run -d -p 8888:80 nginx_0721
+
+# 교재 2-2-2
+docker build -tdocker_node:step1 .
+docker run --name step1 -it docker_node:step1 bash
+  # node --version
+  # npm --version
+  # yarn --version
+  # yarn create nuxt-app
+  # ls node_modules/
+
+#추가 터미널 연결 후...
+  docker exec -it step1 bash
+    # curl localhost:3000
+    # CTRL + p,q
+
+#원래 터미널로 돌아가서...
+   # CTRL + c
+   # exit
+docker cp step1:/app .
+
+# cd 2-2-3
+docker build -t docker_node:step2 .
+docker run --init --name step2 -p 8888:3000 -it docker_node:step2
+
+
+npm install  -> package.json, package-lock.json 
+yarn install  -> package.json, yarn.lock 
+
+# cd 2-2-4
+docker build -t docker_node:step3 .
+docker run --init --name step3 --rm -p 8888:3000 -it docker_node:step3
+
+# Docker Compose 설치
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+ls -al /usr/local/bin/docker-compose <- 실행 권한이 없이 저장됨을 확인
+sudo chmod +x /usr/local/bin/docker-compose
+ls -al /usr/local/bin/docker-compose <- 실행 권한이 부여 됨
+
+# cd 2-2-5
+docker-compose up
+docker-compose down
+
+
+# mkdir my_wordpress, cd  my_wordpress
+아래 내용으로 docker-compose.yml작성
+------------------------------------------------
+version: '3.3'
+
+services:
+    db:
+        image: mysql:5.6
+        restart: always
+        ports:
+          - 13306:3306
+        volumes:
+          - db_data:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: 87654321
+            MYSQL_DATABASE: wordpress
+            MYSQL_USER: wordpress
+            MYSQL_PASSWORD: 12345678
+
+    wordpress:
+        image: wordpress
+        restart: always
+        depends_on:
+          - db
+        ports:
+          - 8888:80
+        environment:
+            WORDPRESS_DB_HOST: db:3306
+            WORDPRESS_DB_NAME: wordpress
+            WORDPRESS_DB_USER: wordpress
+            WORDPRESS_DB_PASSWORD: 12345678
+            WORDPRESS_TABLE_PREFIX: wp_
+
+volumes:
+    db_data: {}
+------------------------------------------------
+  

@@ -1,0 +1,6 @@
+version: "3"
+
+services:
+  # sinatra 샘플 애플리케이션
+  app:
+    build: .

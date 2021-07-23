@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  # Sinatra 샘플 애플리케이션
+  app:
+    build: .
+
+    ports:
+      - "10080:4567"
+
+    volumes:
+      - .:/app
+      - app-bundle:/usr/local/bundle
+
+volumes:
+  # Bundler로 설치한 gem 보관 볼륨
+  app-bundle:

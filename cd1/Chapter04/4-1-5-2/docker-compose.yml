@@ -1,0 +1,22 @@
+version: "2"
+
+services:
+  # JupyterLab
+  jupyter:
+    image: jupyter/datascience-notebook:65761486d5d3
+
+    command: start.sh jupyter lab
+
+    ports:
+      - 8888:8888
+
+    working_dir: /home/jovyan/work
+
+    volumes:
+      - .:/home/jovyan/work
+
+    # user로 지정하는 UID를 호스트 환경의 로그인 사용자와 맞게 설정해 둔다.
+    user: "1001"
+
+    group_add:
+      - users

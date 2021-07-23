@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  laravel:
+    image: docker_php:step4
+    build: .
+    ports:
+    - "8000:8000"
+    volumes:
+    - ./example-app:/app/src
+    - /app/src/vendor

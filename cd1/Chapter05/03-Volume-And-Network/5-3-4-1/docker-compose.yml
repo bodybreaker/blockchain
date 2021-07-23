@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+ nginx:
+   image: nginx
+   networks:
+    - my_network
+
+networks:
+  my_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+       - subnet: 172.13.0.0/16
