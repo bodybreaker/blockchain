@@ -351,8 +351,33 @@ https://docs.docker.com/compose/install/
 https://docs.docker.com/engine/install/ubuntu/
 
 
-* Swarm 설정
+* Swarm 설정  
 Master:  docker swarm init --advertise-addr 172.20.0.100  
-각 워커: docker swarm join --token SWMTKN-1-5zelvbv43ls1dnu5720amsfi6v1s8a3jsbua9bhgwcru0zqg0s-21y2zomjcflixu019wc3r9jkw 172.20.0.100:2377 (
+각 워커: docker swarm join --token SWMTKN-1-5zelvbv43ls1dnu5720amsfi6v1s8a3jsbua9bhgwcru0zqg0s-21y2zomjcflixu019wc3r9jkw 172.20.0.100:2377
 
 
+
+
+
+# Database  
+
+* 마리아DB 설치  
+choco install mariadb
+
+* 마리아DB 접속  
+mysql -uroot
+
+* 패스워드 설정  
+flush privileges;  
+alter user 'root'@'localhost' identified by '87654321';  
+use mysql;  
+select host, user, password from user;(비밀번호 세팅되어있는지 확인)
+
+* mysqladmin을 이용한 패스워드 변경방법  
+mysqladmin -uroot password '새패스워드' -p기존패스워드  
+
+* 샘플 테이블 생성  
+https://github.com/bodybreaker/blockchain/blob/master/mysqlsampledatabase.sql  
+
+* sql 튜토리얼  
+https://www.mysqltutorial.org/mysql-basics/
