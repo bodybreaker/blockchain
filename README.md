@@ -381,3 +381,62 @@ https://github.com/bodybreaker/blockchain/blob/master/mysqlsampledatabase.sql
 
 * sql 튜토리얼  
 https://www.mysqltutorial.org/mysql-basics/
+
+
+
+
+# 영상 녹화 링크  
+0712-1 https://youtu.be/Qq6ZZxA8SoI  
+0712-2 https://youtu.be/4ssMfkXGP2s  
+0712-3 https://youtu.be/-pHXd7aTacg  
+
+0713-1 https://youtu.be/cJW549rfzOY  
+0713-2 https://youtu.be/K-d7Mlnw758  
+0713-3 https://youtu.be/_Z00oAKfLAw  
+0713-4 https://youtu.be/JzyKn3rAz6Y  
+
+0714-1 https://youtu.be/aAaIzK8cSB8  
+0714-2 https://youtu.be/BRijUZRIv6E  
+0714-3 https://youtu.be/dUWmvhYONio  
+0714-4 https://youtu.be/SJFSpJR4b9s  
+
+0715-1 https://youtu.be/7EY9eNsoxmA  
+0715-2 https://youtu.be/8OaXy8Vy7Vo  
+0715-3 https://youtu.be/1GHo8en-R0g  
+0715-4 https://youtu.be/ozXUuprBff4  
+
+0716-1 https://youtu.be/MJgms-iLAPs  
+0716-2 https://youtu.be/eTI4dUDfJJA  
+0716-3 https://youtu.be/nHd9SYZiN_0  
+0716-4 https://youtu.be/FtKL2lUCLKg  
+
+0719-1 https://youtu.be/ePBdRd0vSxI  
+0719-2 https://youtu.be/HR55etpczuk  
+0719-3 https://youtu.be/vNFgQP6IEls  
+0719-4 https://youtu.be/TxFvbyuzZuQ  
+
+0720-1 https://youtu.be/Qbzkqa2L3qo  
+0720-2 https://youtu.be/HLVA0tDa9iI  
+0720-3 https://youtu.be/FtYn-PI76DU  
+0720-4 https://youtu.be/QQO9vAPWuf8  
+
+0721-1 https://youtu.be/C0PZrPvt4fw  
+0721-2 https://youtu.be/UQc38vp5et0  
+0721-3 https://youtu.be/4StKpP3FmeE  
+0721-4 https://youtu.be/kFXJ0skgbUw  
+
+0722-1 https://youtu.be/zBBtkFgCHNk  
+0722-2 https://youtu.be/9EZFvbKO2ME  
+0722-3 https://youtu.be/WgI1vS-Bp3o  
+0722-4 https://youtu.be/gxJaeu1vq-Y  
+
+0723-1 https://youtu.be/V4HvsxinG3E  
+0723-2 https://youtu.be/83Uk5IGDuAY  
+0723-3 https://youtu.be/dlOuFYlJW1M  
+0723-4 https://youtu.be/uUBJEnWMQ50  
+
+0726-1 https://youtu.be/F-3u9pkuNIc  
+0726-2 https://youtu.be/4nVjLzhI7as  
+0726-3 https://youtu.be/8e-iKKn9Kpo  
+0726-4 https://youtu.be/ogune4078ec  
+
