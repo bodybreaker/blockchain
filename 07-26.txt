@@ -1,0 +1,20 @@
+
+# MariaDB 설치
+mysql -uroot 로 접속
+
+# root 비밀번호 설정
+FLUSH PRIVILEGES;
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY '87654321';
+
+SET PASSWORD FOR 'root@localhost' = PASSWORD('87654321');
+
+----------------------------------------------------------------------
+mysqladmin -uroot password 'new_password' -p87654321
+
+# mysqlsampledatabase.sql 실행 -> 예제 Database 생성
+
+
+# like
+% -> 0개 이상의 아무 글자(들)   (*)
+_  -> 해당위치의 아무 글자나 한 글자 (?)
