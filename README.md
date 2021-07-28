@@ -359,7 +359,7 @@ Master:  docker swarm init --advertise-addr 172.20.0.100
 
 
 
-# Database  
+# Mysql(mariadb)    
 
 * 마리아DB 설치  
 choco install mariadb
@@ -380,9 +380,16 @@ mysqladmin -uroot password '새패스워드' -p기존패스워드
 https://github.com/bodybreaker/blockchain/blob/master/mysqlsampledatabase.sql  
 
 * sql 튜토리얼  
-https://www.mysqltutorial.org/mysql-basics/
+https://www.mysqltutorial.org/mysql-basics/  
 
 
+# MongoDB  
+
+* mongodb 설치  
+choco install mongodb -y
+
+* Studio(Robo) 3T 설치 (mongodb IDE)
+choco install studio3t -y
 
 
 # 영상 녹화 링크  
@@ -440,3 +447,7 @@ https://www.mysqltutorial.org/mysql-basics/
 0726-3 https://youtu.be/8e-iKKn9Kpo  
 0726-4 https://youtu.be/ogune4078ec  
 
+0727-1 https://youtu.be/3uc7K1uqM6A
+0727-2 https://youtu.be/1hJtgFIVGRA
+0727-3 https://youtu.be/CIrORc-Jg1w
+0727-4 https://youtu.be/912K05o0OO0  

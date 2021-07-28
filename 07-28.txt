@@ -1,0 +1,13 @@
+# https://www.mysqltutorial.org/
+Home » MySQL Basics » An Essential Guide to MySQL Derived Tables
+
+# CRUD
+  Create   - Insert
+  Read     - Select
+  Update  - Update
+  Delete   - Delete
+
+choco install mongodb
+choco install studio3t
+
+
