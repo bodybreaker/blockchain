@@ -391,6 +391,14 @@ choco install mongodb -y
 * Studio(Robo) 3T 설치 (mongodb IDE)  
 choco install studio3t -y
 
+* Studio 3T 실행 후 mongodb 연결  
+localhost : 27017  
+
+* MapReduce  
+map -> reduce 작업을 통해 집계 데이터 분산 처리  
+
+
+
 
 # 영상 녹화 링크  
 0712-1 https://youtu.be/Qq6ZZxA8SoI  
@@ -447,7 +455,7 @@ choco install studio3t -y
 0726-3 https://youtu.be/8e-iKKn9Kpo  
 0726-4 https://youtu.be/ogune4078ec  
 
-0727-1 https://youtu.be/3uc7K1uqM6A
-0727-2 https://youtu.be/1hJtgFIVGRA
-0727-3 https://youtu.be/CIrORc-Jg1w
+0727-1 https://youtu.be/3uc7K1uqM6A  
+0727-2 https://youtu.be/1hJtgFIVGRA  
+0727-3 https://youtu.be/CIrORc-Jg1w  
 0727-4 https://youtu.be/912K05o0OO0  

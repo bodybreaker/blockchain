@@ -1,0 +1,195 @@
+﻿//데이터베이스 목록을 확인한다.
+show dbs
+
+//staff 데이터베이스의 별도 생성없이 이를 선택(use)하면 생성된다.
+use staff
+
+//생성확인 - refresh 필요
+show dbs
+
+//한 건씩 데이터 입력
+db.staff.insert({"staff_id": 1, "staff_name": "홍길동"})
+
+db.staff.insert({"staff_id": 2, "staff_name": "강호동"})
+
+db.staff.insert(
+    {
+        "staff_id": 2,  //중복
+        "Staff_name": "박찬호" //대문자로 시작하는 Filed 이름
+    }
+)
+// WriteResult({nInserted: 1}) 라고 입력결과를 보여준다.
+
+
+
+
+//여러 건 입력 - Array 사용
+var newStaff=
+[
+               {
+                    "staff_id": 4,
+                    "staff_name": "유재석"
+},
+ {
+                    "staff_id": 5,
+                    "staff_name": "이광수"
+},
+ {
+                    "staff_id": 6,
+                    "staff_name": "하동훈"
+   },
+];
+db.staff.insert(newStaff);
+
+//기본적인 조회
+db.staff.find()
+db.staff.find().forEach(printjson)
+db.staff.find().pretty()
+
+//필드 값이 없는 자료 조회
+db.staff.find( { staff_name: null } )
+
+
+
+
+
+//1건 변경 updateOne() 
+db.staff.updateOne(
+    {
+        staff_name: null
+    },
+    {
+        $set: {
+                    staff_name: "박찬호"
+                }
+    } 
+)
+
+db.staff.updateOne(
+    {
+        staff_name: "박찬호"
+    },
+    {
+        $set: {
+                    staff_id: 03
+                }
+    } 
+)
+
+
+
+
+//Staff_name 필드 삭제(대문자 S로 시작하는 필드명)
+db.getCollection('staff').update({}, {$unset: {Staff_name: 1}}, {multi: true})
+
+
+//1건 삭제
+db.getCollection('staff').deleteOne({staff_name: "하동훈"})
+
+
+//비교 구문
+db.getCollection('staff').deleteMany({staff_id: > 3})  //오류 발생
+
+db.getCollection('staff').deleteMany({staff_id: {$gt: 3}})
+
+//데이터 재 생성 => staff_id 4~6, JSON 복사해 Result 창에서 붙여넣기 
+
+/*
+조회관련 구문
+find()
+findAndModify()
+findOne()
+findOneAndDelete()
+findOneAndReplace()
+findOneAndUpdate()
+*/
+
+
+
+
+//조회 - 값 비교
+db.getCollection('staff').find()
+db.getCollection('staff').find({staff_id: {$gt: 3}})
+db.getCollection('staff').find({staff_id: {$lte: 3}})
+db.getCollection('staff').find({staff_id: {$eq: 3}})
+db.getCollection('staff').find({staff_id: 3})
+db.getCollection('staff').find({staff_id: {$in: [1,4,10]}})
+
+//조회 - or, and
+db.getCollection('staff').find({$or: [{staff_id: 3}, {staff_name: "유재석"}]})
+db.getCollection('staff').find({$and: [{staff_id: {$gte: 3}}, {staff_id: {$lt: 5}}]})
+
+//조회 - contains
+db.getCollection("staff").find({ "staff_name": /.*동.*/i })
+
+
+//정렬
+db.staff.find().sort({staff_id: 1})
+db.staff.find().sort({staff_id: -1})
+db.staff.find().sort({staff_name: -1})
+
+
+
+
+// 집계 Aggregation Pipeline
+db.staff.updateMany(
+    {
+        staff_id: {$gt: 3}
+    },
+    {
+        $set: {
+                    sales: 1000
+                }
+    } 
+)
+db.staff.updateMany(
+    {
+        staff_id: {$lte: 3}
+    },
+    {
+        $set: {
+                    sales: 500
+                }
+    } 
+)
+
+
+
+
+/*
+sql문 대응 Aggregation Pipeline 확인
+select sum(sales)
+from staff
+where staff_id > 2
+order by staff_name;
+*/
+
+
+
+
+//map-reduce용 컬렉션 생성, 도큐멘트 추가
+db.orders.insertMany([
+   { _id: 1, cust_id: "Ant O. Knee", ord_date: new Date("2020-03-01"), price: 25, items: [ { sku: "oranges", qty: 5, price: 2.5 }, { sku: "apples", qty: 5, price: 2.5 } ], status: "A" },
+   { _id: 2, cust_id: "Ant O. Knee", ord_date: new Date("2020-03-08"), price: 70, items: [ { sku: "oranges", qty: 8, price: 2.5 }, { sku: "chocolates", qty: 5, price: 10 } ], status: "A" },
+   { _id: 3, cust_id: "Busby Bee", ord_date: new Date("2020-03-08"), price: 50, items: [ { sku: "oranges", qty: 10, price: 2.5 }, { sku: "pears", qty: 10, price: 2.5 } ], status: "A" },
+   { _id: 4, cust_id: "Busby Bee", ord_date: new Date("2020-03-18"), price: 25, items: [ { sku: "oranges", qty: 10, price: 2.5 } ], status: "A" },
+   { _id: 5, cust_id: "Busby Bee", ord_date: new Date("2020-03-19"), price: 50, items: [ { sku: "chocolates", qty: 5, price: 10 } ], status: "A"},
+   { _id: 6, cust_id: "Cam Elot", ord_date: new Date("2020-03-19"), price: 35, items: [ { sku: "carrots", qty: 10, price: 1.0 }, { sku: "apples", qty: 10, price: 2.5 } ], status: "A" },
+   { _id: 7, cust_id: "Cam Elot", ord_date: new Date("2020-03-20"), price: 25, items: [ { sku: "oranges", qty: 10, price: 2.5 } ], status: "A" },
+   { _id: 8, cust_id: "Don Quis", ord_date: new Date("2020-03-20"), price: 75, items: [ { sku: "chocolates", qty: 5, price: 10 }, { sku: "apples", qty: 10, price: 2.5 } ], status: "A" },
+   { _id: 9, cust_id: "Don Quis", ord_date: new Date("2020-03-20"), price: 55, items: [ { sku: "carrots", qty: 5, price: 1.0 }, { sku: "apples", qty: 10, price: 2.5 }, { sku: "oranges", qty: 10, price: 2.5 } ], status: "A" },
+   { _id: 10, cust_id: "Don Quis", ord_date: new Date("2020-03-23"), price: 25, items: [ { sku: "oranges", qty: 10, price: 2.5 } ], status: "A" }
+])
+
+
+
+
+/*
+Map, Reduce 함수 내용
+map
+    emit(this.cust_id, this.price);
+
+reduce
+   return Array.sum(values);
+*/
+
