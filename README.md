@@ -388,7 +388,7 @@ https://www.mysqltutorial.org/mysql-basics/
 * mongodb 설치  
 choco install mongodb -y
 
-* Studio(Robo) 3T 설치 (mongodb IDE)
+* Studio(Robo) 3T 설치 (mongodb IDE)  
 choco install studio3t -y
 
 
