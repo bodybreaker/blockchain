@@ -392,10 +392,68 @@ choco install mongodb -y
 choco install studio3t -y
 
 * Studio 3T 실행 후 mongodb 연결  
-localhost : 27017  
+localhost:27017  
 
 * MapReduce  
 map -> reduce 작업을 통해 집계 데이터 분산 처리  
+
+
+* Studio 3T 튜토리얼  
+https://studio3t.com/academy
+
+
+# mongodb replica 설정
+
+* Ubuntu에 몽고DB 설치  
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/  
+
+* replica set 매뉴얼  
+https://docs.mongodb.com/manual/tutorial/deploy-replica-set/  
+
+* 디렉토리 생성  
+c:\db\rs0_0  
+c:\db\rs0_1  
+c:\db\rs0_2  
+
+* 각 서버 설정  
+mongod --configsvr --replSet "rs0" --dbpath c:\db\rs0_0 --bind_ip 0.0.0.0 --port 28017  
+mongod --configsvr --replSet "rs0" --dbpath c:\db\rs0_1 --bind_ip 0.0.0.0 --port 28018  
+mongod --configsvr --replSet "rs0" --dbpath c:\db\rs0_2 --bind_ip 0.0.0.0 --port 28019  
+
+rs.initiate( {  
+   _id : "rs0",  
+   members: [  
+      { _id: 0, host: "mongodb0.example.net:27017" },  
+      { _id: 1, host: "mongodb1.example.net:27017" },  
+      { _id: 2, host: "mongodb2.example.net:27017" }  
+   ]  
+})
+
+
+# Go Lang
+
+* Go Lang 설치
+https://golang.org/dl/  
+
+* Atom 및 플러그인 설치  
+http://golang.site/go/article/2-Go-%EC%84%A4%EC%B9%98%EC%99%80-Go-%ED%8E%B8%EC%A7%91%EA%B8%B0-%EC%86%8C%EA%B0%9C  
+
+* Go 언어 가이드  
+http://golang.site/go/article/21-Go-%EB%A3%A8%ED%8B%B4-goroutine  
+
+* http request 테스트 사이트  
+http://httpbin.org/  
+
+
+* DB 라이브러리 다운로드 ( GOPATH 환경변수를 프로젝트 경로로 설정해 주어야 함)  
+go get -u github.com/go-sql-driver/mysql
+
+* go web 프레임워크(martini)  
+https://github.com/go-martini/martini  
+
+* martini 및 render 설치  
+go get github.com/go-martini/martini  
+go get github.com/martini-contrib/render
 
 
 
@@ -459,3 +517,25 @@ map -> reduce 작업을 통해 집계 데이터 분산 처리
 0727-2 https://youtu.be/1hJtgFIVGRA  
 0727-3 https://youtu.be/CIrORc-Jg1w  
 0727-4 https://youtu.be/912K05o0OO0  
+
+0728-1 https://youtu.be/GWEFlto7LZk  
+0728-2 https://youtu.be/YQJODhfR9Es  
+0728-3 https://youtu.be/_sKRftSCAuw  
+0728-4 https://youtu.be/PaHP9yfGrbU  
+
+0730-1 https://youtu.be/MJf0ETVRUsY  
+0730-2 https://youtu.be/ZV5oYoytFsg  
+0730-3 https://youtu.be/0BK1VCindMw  
+0730-4 https://youtu.be/12HMGdfdEgs  
+
+0809-1 https://youtu.be/0AuGBSd6aNY  
+0809-2 https://youtu.be/-G1Fn4EC184  
+0809-3 https://youtu.be/Ho3Zcj5puBQ  
+0809-4 https://youtu.be/Pf3gDiLi70k  
+
+0810-1 https://youtu.be/HJ1BaHr4wiM  
+0810-2 https://youtu.be/RWP2XGfSxN8  
+0810-3 https://youtu.be/hHv1aQXW6aE  
+0810-4 https://youtu.be/oQUvNz22Td4  
+
+ 
