@@ -1,0 +1,13 @@
+<table border="5px">
+  <tr>
+    <th>Name</th>
+    <th>Email Address</th>
+    <th>Deptartment</th>
+  </tr>
+  {{ range .}}
+  <tr>
+    <td>{{ .Name }}</td>
+    <td>{{ .Email }}</td>
+    <td>{{ .Dept }}</td>
+  {{ end }}
+</table>

@@ -441,6 +441,9 @@ http://golang.site/go/article/2-Go-%EC%84%A4%EC%B9%98%EC%99%80-Go-%ED%8E%B8%EC%A
 * Go 언어 가이드  
 http://golang.site/go/article/21-Go-%EB%A3%A8%ED%8B%B4-goroutine  
 
+* Go 모듈 환경설정  
+go env -w GO111MODULE=auto
+
 * http request 테스트 사이트  
 http://httpbin.org/  
 
@@ -454,6 +457,59 @@ https://github.com/go-martini/martini
 * martini 및 render 설치  
 go get github.com/go-martini/martini  
 go get github.com/martini-contrib/render
+
+
+* dockerfile 생성  
+FROM golang  
+
+RUN go get github.com/go-martini/martini  
+RUN go get github.com/go-sql-driver/mysql  
+RUN go get github.com/martini-contrib/render  
+
+* docker image 빌드  
+docker build -t my/goapi:latest .  
+
+* docker image 실행 (현재 ${PWD}/app 폴더내에 파일들을 /go/app 복사하여 실행)  
+docker run -it --rm --name go_api -v ${PWD}/app:/go/app my/goapi
+
+
+# node.js  
+* node.js Long Term Support 설치  
+choco install nodejs-lts
+
+* npm 설정  
+npm init -y
+
+
+
+# 하이퍼레저 패브릭  
+* 공식 홈페이지  
+https://www.hyperledger.org/
+
+
+* Mable 예제  
+https://github.com/IBM-Blockchain-Archive/marbles/blob/master/README-ko.md
+
+* 폴더 생성  
+C:\VAGRANT\fabric14  
+
+* Vagrant file 생성  
+vagrant init acaruso/fabric-14
+
+* Vagrantfile 수정 
+<pre><code>
+  config.vm.provider "virtualbox" do |vb|
+  #   # Display the VirtualBox GUI when booting the machine
+  #   vb.gui = true
+  #
+  #   # Customize the amount of memory on the VM:
+     vb.memory = "1024"
+	 vb.cpus = 4
+  end
+</code></pre>
+
+* vagrant 기동  
+vagrant up
 
 
 

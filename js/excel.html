@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<!-- --disable-web-security --user-data-dir="C:/ChromeDevSession" -->
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>금소부 학습데이터 검증</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </head>
+
+  <script>
+
+    function settingDataTable(list){
+      let tbody = $('#tbody');
+      list.forEach((item, i) => {
+
+
+        $.ajax({
+          type: "POST",
+          url: "http://118.128.43.33:9901/engine/eval2",
+          data: {'id':34,'text':item},
+          success: function(data){
+
+            let tr = '<tr><td>'+i+"</td><td>"+item+"</td><td id='td-"+i+"'></td></tr>";
+            tbody.append(tr);
+            //let subTbody = '<table><thead><th>텍스트</th><th>분류</th><th>퍼센트</th><th>긍/부</th></thead><tbody>'
+
+
+            let tempTable = document.createElement('table');
+            tempTable.classList.add('table')
+            $(tempTable).append('<th>분류</th><th>긍정/부정</th><th>텍스트</th>')
+            $('#td-'+i).append(tempTable)
+            $(tempTable).attr('border', '1');
+
+            data[0]['sub_results'].forEach((item, i) => {
+                let subText = item['sub_text'];
+                let category = item['categories'][0]['category'];
+                let matchRate = item['categories'][0]['match_rate'];
+                let emotion = item['emotion'];
+
+                $(tempTable).append('<tr><td>'+category+"("+matchRate*10+"%)</td><td>"+emotion+"</td><td>"+subText+"</td></tr>")
+
+                //console.log(subText , category,matchRate, emotion)
+            });
+
+          }
+        });
+
+      });
+    }
+
+
+    function handleData(sheet){
+      var rowObj =XLSX.utils.sheet_to_json(sheet);
+	    //console.log(JSON.stringify(rowObj));
+      //console.log(rowObj[1]);
+
+      var originalList = [];
+      var exItem=''
+
+      for(i=0;i<rowObj.length;i++){
+        if(exItem != rowObj[i]["원본데이터"] && rowObj[i]["원본데이터"] != undefined){
+          originalList.push(rowObj[i]["원본데이터"])
+        }
+        exItem = rowObj[i]["원본데이터"];
+      }
+      // rowObj.forEach((item, i) => {
+      //     if(exItem != item && item != undefined){
+      //       originalList.push(item["원본데이터"])
+      //     }
+      //     exItem = item;
+      // });
+
+      console.log(originalList.length)
+      settingDataTable(originalList)
+
+    }
+
+    function excelExport(event){
+	     excelExportCommon(event, handleData);
+    }
+    function excelExportCommon(event, callback){
+      var input = event.target;
+      var reader = new FileReader();
+      reader.onload = function(){
+          var fileData = reader.result;
+          var wb = XLSX.read(fileData, {type : 'binary'});
+          var sheetNameList = wb.SheetNames; // 시트 이름 목록 가져오기
+          var firstSheetName = sheetNameList[0]; // 첫번째 시트명
+          var firstSheet = wb.Sheets[firstSheetName]; // 첫번째 시트
+          callback(firstSheet);
+      };
+      reader.readAsBinaryString(input.files[0]);
+    }
+  </script>
+
+
+<body>
+
+  <div>
+
+  파일 선택 : <input type="file" id="excelFile" onchange="excelExport(event)"/>
+  </div>
+
+
+  <div>
+    <button onclick="test();">테스트</button>
+  </div>
+
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <th> # </th>
+        <th>원본 데이터</th>
+        <th>결과</th>
+      </thead>
+
+      <tbody id='tbody'>
+
+      </tbody>
+    </table>
+  </div>
+
+
+</body>
+</html>
