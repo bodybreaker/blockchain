@@ -509,8 +509,95 @@ vagrant init acaruso/fabric-14
 </code></pre>
 
 * vagrant 기동  
-vagrant up
+vagrant up  
+vagrant ssh
 
+* Marbles git clone  
+git clone https://github.com/IBM-Blockchain/marbles.git --depth 1
+
+* Hpyerledger git clone  
+git clone https://github.com/hyperledger/fabric-samples.git  
+
+* nexus 도메인이 없어져서 hyperledger 다운로드부분을 변경해야함  
+curl -sSL https://raw.githubusercontent.com/hyperledger/fabric/main/scripts/bootstrap.sh -o setup_script.sh
+
+
+* 튜토리얼  
+https://hyperledger-fabric.readthedocs.io/en/release-2.2/tutorials.html
+
+
+
+
+# 블록체인 네트워크(하이퍼레저 패브릭) 구성  
+(https://hyperledger-fabric.readthedocs.io/en/release-2.2/install.html)  
+
+* golang 설치  
+* docker 설치  
+* docker-compose 설치  
+
+* nodejs 설치 (https://github.com/nodesource/distributions) - 10버젼대 설치(하이퍼렛져 지원)  
+curl -fsSL https://deb.nodesource.com/setup_10.x | sudo -E bash - 
+sudo apt-get install -y nodejs  
+sudo apt-get install -y build-essential
+
+* libtool 설치  
+sudo apt-get install -y libtool  
+
+
+* hyperledger 바이너리 설치  
+curl -sSL https://bit.ly/2ysbOFE | bash -s -- 2.2.3 1.5.1  
+
+export PATH=<path to download location>/bin:$PATH  
+
+
+* 테스트 네트워크 실행
+/fabric-samples/test-network/network.sh up
+
+* org1과 org2 사이 트렌젝션을 위한 채널 생성  
+./network.sh createChannel (기본 이름은 mychannel)  
+
+* COMPOSE_PROJECT_NAME 환경변수 설정
+export COMPOSE_PROJECT_NAME=docker  
+
+
+* 체인코드 배포  
+./network.sh deployCC -ccn basic -ccp ../asset-transfer-basic/chaincode-go -ccl go  
+
+
+
+* peer 명령어 사용을 위한 path 설정  
+<pre><code>
+export PATH=${PWD}/../bin:$PATH
+export FABRIC_CFG_PATH=$PWD/../config/  
+export CORE_PEER_TLS_ENABLED=true
+export CORE_PEER_LOCALMSPID="Org1MSP"
+export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+export CORE_PEER_ADDRESS=localhost:7051
+</code></pre>
+
+
+* 체인코드 실행  
+<pre><code>
+peer chaincode invoke \
+-o localhost:7050 \
+--ordererTLSHostnameOverride orderer.example.com \
+--tls \
+--cafile ${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem \
+-C mychannel \
+-n basic \
+--peerAddresses localhost:7051 \
+--tlsRootCertFiles ${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt \
+--peerAddresses localhost:9051 \
+--tlsRootCertFiles ${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt \
+-c '{"function":"InitLedger","Args":[]}'
+</code></pre>
+
+* 조회하는 체인코드 실행  
+<pre><code>
+peer chaincode query -C mychannel -n basic -c '{"Args":["GetAllAssets"]}'
+peer chaincode query -C mychannel -n basic -c '{"function":"ReadAsset","Args":["asset1"]}'
+</code></pre>
 
 
 
@@ -594,4 +681,47 @@ vagrant up
 0810-3 https://youtu.be/hHv1aQXW6aE  
 0810-4 https://youtu.be/oQUvNz22Td4  
 
+0811-1 https://youtu.be/dH-PeiY4iww  
+0811-2 https://youtu.be/bVCsnmBSzvk  
+0811-3 https://youtu.be/hHrHc9pw8fA  
+0811-4 https://youtu.be/-OEKFD9Oytw  
+
+0812-1 https://youtu.be/Ga0PDsP0hBE  
+0812-2 https://youtu.be/QkxKVy00WWY  
+0812-3 https://youtu.be/pesXZd5ijPA  
+0812-4 https://youtu.be/UgcmiJzEKCw  
  
+0813-1 https://youtu.be/mqyuAmMwF3Q  
+0813-2 https://youtu.be/KKK23pFCQtY  
+0813-3 https://youtu.be/L45ImSehFbg  
+0813-4 https://youtu.be/dJDpZHwsEdU  
+
+0817-1 https://youtu.be/pvXHYq4hbSI  
+0817-2 https://youtu.be/yeMn6h5wrrM  
+0817-3 https://youtu.be/mcYHPCxUFRE  
+0817-4 https://youtu.be/yuI4GrvXqqI  
+ 
+0818-1 https://youtu.be/F8F6evvy7NM  
+0818-2 https://youtu.be/y3qeg9hO83o  
+0818-3 https://youtu.be/AQTc07TT29Y  
+0818-4 https://youtu.be/p_byHqCHzUM  
+
+0819-1 https://youtu.be/UhOlDsOvIAo  
+0819-2 https://youtu.be/VT7iJJTDivs  
+0819-3 https://youtu.be/0bLw_CCHe2c  
+0819-4 https://youtu.be/_zPlFHd1vVc  
+
+0820-1 https://youtu.be/KsBZBfSvB4c  
+0820-2 https://youtu.be/Q2XaKofR-TQ  
+0820-3 https://youtu.be/DYLnoLW58Bc  
+0820-4 https://youtu.be/BJPBCfUGD0Y  
+
+0823-1 https://youtu.be/1DJOsqBpwHY  
+0823-2 https://youtu.be/VFfrbSlVaQo  
+0823-3 https://youtu.be/DGM1ixhslB4  
+0823-4 https://youtu.be/_WzKsb9dRF4  
+
+0824-1 https://youtu.be/E-gZTkKT9ww  
+0824-2 https://youtu.be/D9gl_oV-MwU  
+0824-3 https://youtu.be/8aG_vpU9e2k  
+0824-4 https://youtu.be/bW0J5UnnHlo  
